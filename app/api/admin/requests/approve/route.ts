@@ -27,7 +27,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing requestId" }, { status: 400 });
     }
 
-    const requestRef = adminDb.collection("ehsasRequests").doc(body.requestId);
+    const requestId = body.requestId;
+    const requestRef = adminDb.collection("ehsasRequests").doc(requestId);
     const counterRef = adminDb.collection("counters").doc("ehsas");
 
     const { ehsasId, requestData } = await adminDb.runTransaction(
@@ -56,7 +57,7 @@ export async function POST(request: Request) {
           updatedAt: adminTimestamp(),
           ehsasId: generatedId,
         });
-        tx.set(adminDb.collection("ehsasMembers").doc(body.requestId), {
+        tx.set(adminDb.collection("ehsasMembers").doc(requestId), {
           ...requestData,
           status: "approved",
           ehsasId: generatedId,
@@ -69,7 +70,7 @@ export async function POST(request: Request) {
 
     await logActivity({
       actionType: "approved",
-      requestId: body.requestId,
+      requestId,
       actorUid: adminUser.uid,
       actorEmail: adminUser.email ?? null,
       meta: { ehsasId },
@@ -101,7 +102,7 @@ export async function POST(request: Request) {
     }).catch(async (error) => {
       await logActivity({
         actionType: "email_error",
-        requestId: body.requestId,
+        requestId,
         actorUid: adminUser.uid,
         meta: { context: "approval_applicant", error: String(error) },
       });
@@ -114,7 +115,7 @@ export async function POST(request: Request) {
     }).catch(async (error) => {
       await logActivity({
         actionType: "email_error",
-        requestId: body.requestId,
+        requestId,
         actorUid: adminUser.uid,
         meta: { context: "approval_admin", error: String(error) },
       });
