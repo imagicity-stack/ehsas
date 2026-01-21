@@ -41,26 +41,29 @@ export default function AdminLoginPage() {
       router.push("/admin");
     } catch (error) {
       setStatus("error");
-      setMessage(
-        error instanceof Error ? error.message : "Unable to sign in."
-      );
+      setMessage(error instanceof Error ? error.message : "Unable to sign in.");
     }
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Container className="py-24">
-        <div className="mx-auto max-w-md space-y-6 rounded-[32px] border border-border/60 bg-white/80 p-8 shadow-[0_25px_70px_-55px_rgba(15,23,42,0.5)]">
-          <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
-            Admin Access
-          </span>
-          <h1 className="font-serif text-3xl text-charcoal">Admin Login</h1>
+        <div className="mx-auto max-w-md rounded-[36px] border border-border/60 bg-white/85 p-10 shadow-[0_30px_80px_-60px_rgba(15,23,42,0.5)]">
+          <div className="space-y-4">
+            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
+              Admin Access
+            </span>
+            <h1 className="font-serif text-3xl text-charcoal">Admin Login</h1>
+            <p className="text-sm text-charcoal/70">
+              Use your staff credentials to manage EHSAS registration requests.
+            </p>
+          </div>
           {message ? (
-            <div className="rounded-2xl border border-crimson/30 bg-red-50 px-4 py-3 text-sm text-crimson">
+            <div className="mt-6 rounded-2xl border border-crimson/30 bg-red-50 px-4 py-3 text-sm text-crimson">
               {message}
             </div>
           ) : null}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
             <label className="space-y-2 text-sm">
               <span>Email</span>
               <input
@@ -68,7 +71,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
+                className="w-full rounded-2xl border border-border/60 bg-white/85 px-4 py-3 text-sm outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
               />
             </label>
             <label className="space-y-2 text-sm">
@@ -78,7 +81,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
-                className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
+                className="w-full rounded-2xl border border-border/60 bg-white/85 px-4 py-3 text-sm outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
               />
             </label>
             <button

@@ -32,6 +32,9 @@ type SubmitState =
   | { status: "error"; message: string }
   | { status: "success" };
 
+const inputClassName =
+  "w-full rounded-2xl border border-border/60 bg-white/85 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20";
+
 export default function RegisterPage() {
   const [form, setForm] = useState<FormState>(defaultForm);
   const [submitState, setSubmitState] = useState<SubmitState>({
@@ -118,8 +121,8 @@ export default function RegisterPage() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Container className="py-24">
-          <div className="mx-auto max-w-2xl rounded-[32px] border border-border/60 bg-white/80 p-10 text-center shadow-[0_25px_70px_-55px_rgba(15,23,42,0.5)]">
-            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
+          <div className="mx-auto max-w-2xl rounded-[36px] border border-border/60 bg-white/85 p-12 text-center shadow-[0_30px_80px_-60px_rgba(15,23,42,0.5)]">
+            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
               Request submitted
             </span>
             <h1 className="mt-4 font-serif text-3xl text-charcoal">
@@ -139,7 +142,7 @@ export default function RegisterPage() {
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                className="inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
               >
                 Return home
               </Link>
@@ -158,21 +161,36 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <section className="border-b border-border/60 bg-white/70">
+        <Container className="py-16 md:py-20">
+          <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div className="space-y-4">
+              <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
+                Registration
+              </span>
+              <h1 className="font-serif text-4xl text-charcoal">
+                Alumni Registration
+              </h1>
+              <p className="max-w-2xl text-sm text-charcoal/70">
+                Submit your details for verification. Once approved, you will
+                receive your EHSAS ID and access to alumni updates.
+              </p>
+            </div>
+            <div className="rounded-[28px] border border-border/60 bg-gradient-to-br from-crimson/10 via-white to-mist p-6 text-sm text-charcoal/70">
+              <p className="font-semibold text-charcoal">What you&apos;ll get</p>
+              <ul className="mt-3 space-y-2">
+                <li>Verified alumni credentials</li>
+                <li>Event and reunion invitations</li>
+                <li>Mentorship matching opportunities</li>
+                <li>Access to chapter updates</li>
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       <Container className="py-16 md:py-24">
         <div className="space-y-10">
-          <div className="space-y-4">
-            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
-              Registration
-            </span>
-            <h1 className="font-serif text-4xl text-charcoal">
-              Alumni Registration
-            </h1>
-            <p className="max-w-2xl text-sm text-charcoal/70">
-              Submit your details for verification. Once approved, you will
-              receive your EHSAS ID and access to alumni updates.
-            </p>
-          </div>
-
           {submitState.status === "error" ? (
             <div className="rounded-2xl border border-crimson/30 bg-red-50 px-4 py-3 text-sm text-crimson">
               {submitState.message}
@@ -181,7 +199,7 @@ export default function RegisterPage() {
 
           <form
             onSubmit={handleSubmit}
-            className="space-y-10 rounded-[32px] border border-border/60 bg-white/80 p-8 shadow-[0_25px_70px_-55px_rgba(15,23,42,0.45)]"
+            className="space-y-10 rounded-[36px] border border-border/60 bg-white/85 p-10 shadow-[0_30px_80px_-60px_rgba(15,23,42,0.45)]"
           >
             <SectionHeading
               eyebrow="Student's Profile"
@@ -220,7 +238,7 @@ export default function RegisterPage() {
                     value={form[field.name as keyof FormState]}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
+                    className={inputClassName}
                   />
                 </label>
               ))}
@@ -234,7 +252,7 @@ export default function RegisterPage() {
                   value={form.lastHouse}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
+                  className={inputClassName}
                   placeholder="Enter your house name"
                 />
               </label>
@@ -257,7 +275,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   rows={4}
                   required
-                  className="w-full resize-none rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
+                  className={inputClassName}
                 />
               </label>
               {[
@@ -276,7 +294,7 @@ export default function RegisterPage() {
                     value={form[field.name as keyof FormState]}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
+                    className={inputClassName}
                   />
                 </label>
               ))}
@@ -290,7 +308,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={submitState.status === "loading"}
-                className="inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {submitState.status === "loading"
                   ? "Submitting..."

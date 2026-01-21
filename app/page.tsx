@@ -2,149 +2,177 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 
-const spotlight = [
+const stats = [
+  { label: "Active alumni", value: "12k+" },
+  { label: "Chapters worldwide", value: "48" },
+  { label: "Mentorship matches", value: "1.9k" },
+  { label: "Years of legacy", value: "46" },
+];
+
+const focusAreas = [
+  {
+    title: "Verified alumni registry",
+    description:
+      "A trusted database built with approvals, clean records, and careful stewardship.",
+  },
+  {
+    title: "Career & mentorship",
+    description:
+      "Curated introductions that unlock internships, guidance, and leadership pathways.",
+  },
+  {
+    title: "Events & reunions",
+    description:
+      "Hybrid gatherings that bring Eldenites together across campuses and continents.",
+  },
+];
+
+const programs = [
+  {
+    title: "Global mentorship weekend",
+    timeline: "April 2026",
+    detail: "Invite-only sessions with alumni leaders and student founders.",
+  },
+  {
+    title: "Heritage scholarship fund",
+    timeline: "Ongoing",
+    detail: "Support students with tuition grants and study-abroad stipends.",
+  },
+  {
+    title: "City chapter salons",
+    timeline: "Quarterly",
+    detail: "Small-format dinners for alumni networking and speaker spotlights.",
+  },
+];
+
+const testimonials = [
   {
     name: "Dr. Rhea Malhotra",
-    detail: "Class of 2004 · Cardiologist, Mayo Clinic",
+    role: "Class of 2004 · Cardiologist, Mayo Clinic",
     quote:
-      "Elden Heights taught me to lead with empathy. EHSAS keeps that spirit alive.",
+      "EHSAS keeps our traditions alive while opening new doors for the next generation.",
   },
   {
     name: "Arjun Mehta",
-    detail: "Class of 2010 · Founder, Lumen Labs",
+    role: "Class of 2010 · Founder, Lumen Labs",
     quote:
-      "The alumni network is a bridge between our legacy and the future we build.",
+      "The network feels intentional, curated, and deeply supportive of alumni growth.",
   },
   {
     name: "Sana Rahman",
-    detail: "Class of 2016 · UN Policy Fellow",
-    quote: "EHSAS is where our shared stories become global opportunities.",
-  },
-];
-
-const events = [
-  {
-    title: "Founders Day Reunion",
-    date: "December 14, 2025",
-    location: "Elden Heights Campus",
-  },
-  {
-    title: "Global Alumni Virtual Meet",
-    date: "February 08, 2026",
-    location: "Online",
-  },
-  {
-    title: "Mentorship Weekend",
-    date: "April 12, 2026",
-    location: "New Delhi",
-  },
-];
-
-const givingBack = [
-  {
-    title: "Mentorship",
-    description:
-      "Guide current students with career direction, life lessons, and encouragement.",
-  },
-  {
-    title: "Internships",
-    description:
-      "Open doors with opportunities across industries and geographies.",
-  },
-  {
-    title: "Scholarships",
-    description:
-      "Create lasting impact through scholarships for deserving students.",
-  },
-  {
-    title: "Donations",
-    description:
-      "Support campus initiatives, infrastructure, and academic excellence.",
+    role: "Class of 2016 · UN Policy Fellow",
+    quote:
+      "Elden Heights always taught us to lead with heart. EHSAS amplifies that mission.",
   },
 ];
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/60 bg-white/80 backdrop-blur">
-        <Container className="flex items-center justify-between py-6">
+      <header className="border-b border-border/60 bg-white/70 backdrop-blur">
+        <Container className="flex flex-wrap items-center justify-between gap-6 py-6">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-crimson">
               EHSAS
             </p>
-            <p className="font-serif text-xl text-charcoal">
+            <p className="font-serif text-2xl text-charcoal">
               Elden Heights Alumni Society
             </p>
           </div>
-          <div className="hidden items-center gap-6 text-sm text-charcoal/80 md:flex">
-            <span>Since 1978</span>
-            <span className="h-5 w-px bg-border" />
-            <span>Global Network</span>
-          </div>
+          <nav className="flex flex-wrap items-center gap-4 text-sm font-semibold text-charcoal/70">
+            <Link href="/register" className="hover:text-charcoal">
+              Register
+            </Link>
+            <Link href="/privacy" className="hover:text-charcoal">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-charcoal">
+              Terms
+            </Link>
+            <Link
+              href="/admin/login"
+              className="rounded-full border border-charcoal/30 px-4 py-2 text-xs uppercase tracking-[0.2em] text-charcoal transition hover:border-crimson hover:text-crimson"
+            >
+              Admin
+            </Link>
+          </nav>
         </Container>
       </header>
 
       <main className="space-y-24 pb-24">
-        <section className="pt-16 md:pt-24">
-          <Container className="grid gap-12 rounded-[40px] border border-border/60 bg-white/80 px-8 py-12 shadow-[0_30px_80px_-60px_rgba(15,23,42,0.6)] md:grid-cols-[1.1fr_0.9fr] md:items-center">
+        <section className="pt-14 md:pt-20">
+          <Container className="grid gap-12 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-8">
-              <div className="space-y-4">
-                <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.4em] text-crimson">
-                  Alumni Society
+              <div className="space-y-5">
+                <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
+                  Alumni network
                 </span>
                 <h1 className="font-serif text-4xl leading-tight text-charcoal md:text-6xl">
-                  EHSAS
+                  Elevate the Elden Heights legacy.
                 </h1>
-                <p className="text-lg text-charcoal/80">
-                  Elden Heights School Alumni Society
-                </p>
-                <p className="max-w-xl text-base text-charcoal/70">
-                  A lifelong community of Eldenites across the world. Connect,
-                  contribute, celebrate the journey.
+                <p className="max-w-xl text-lg text-charcoal/70">
+                  A modern alumni society that blends tradition, mentorship, and
+                  global connections for every Eldenite.
                 </p>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Link
                   href="/register"
-                  className="inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                  className="inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
                 >
-                  Join EHSAS
+                  Become a member
                 </Link>
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center rounded-full border border-charcoal/20 bg-white/60 px-6 py-3 text-sm font-semibold text-charcoal transition hover:border-charcoal/40 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
-                  aria-label="Explore Alumni Network"
+                  className="inline-flex items-center justify-center rounded-full border border-charcoal/30 bg-white/70 px-7 py-3 text-sm font-semibold text-charcoal transition hover:border-charcoal/60 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                  aria-label="Discover the community"
                 >
-                  Explore Alumni Network
+                  Discover the community
                 </button>
               </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-2xl border border-border/60 bg-white/80 px-5 py-4 shadow-[0_20px_50px_-40px_rgba(15,23,42,0.45)]"
+                  >
+                    <p className="text-2xl font-semibold text-charcoal">
+                      {stat.value}
+                    </p>
+                    <p className="text-xs uppercase tracking-[0.25em] text-charcoal/50">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="rounded-[28px] border border-border/60 bg-gradient-to-br from-white via-white to-mist p-8 shadow-[0_25px_70px_-50px_rgba(15,23,42,0.45)]">
-              <div className="space-y-6">
-                <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
-                  Harvard-inspired
-                </span>
-                <h2 className="font-serif text-3xl text-charcoal">
-                  A legacy of excellence, refined for today.
-                </h2>
-                <p className="text-sm text-charcoal/70">
-                  Built for alumni who value tradition and purposeful networks,
-                  EHSAS blends heritage with modern engagement.
+            <div className="space-y-6">
+              <div className="rounded-[32px] border border-border/70 bg-gradient-to-br from-crimson/10 via-white to-mist p-8 shadow-[0_25px_70px_-45px_rgba(30,41,59,0.55)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+                  Community first
                 </p>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  {[
-                    "Premium editorial design",
-                    "Verified alumni registry",
-                    "Global chapters",
-                    "Mentorship & giving",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-2xl border border-border/60 bg-white/80 px-4 py-3 text-charcoal"
-                    >
-                      {item}
-                    </div>
-                  ))}
+                <h2 className="mt-4 font-serif text-3xl text-charcoal">
+                  A curated experience for alumni across generations.
+                </h2>
+                <p className="mt-4 text-sm text-charcoal/70">
+                  From verified profiles to chapter programming, every detail
+                  is designed to strengthen connection and impact.
+                </p>
+              </div>
+              <div className="rounded-[28px] border border-border/60 bg-white/80 p-6">
+                <p className="text-xs uppercase tracking-[0.3em] text-charcoal/50">
+                  Next reunion
+                </p>
+                <p className="mt-3 font-serif text-2xl text-charcoal">
+                  Founders Day 2025
+                </p>
+                <p className="mt-2 text-sm text-charcoal/70">
+                  December 14 · Elden Heights Campus · In-person & virtual
+                </p>
+                <div className="mt-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-crimson">
+                  <span>Join the waitlist</span>
+                  <span className="h-1 w-1 rounded-full bg-crimson" />
+                  <span>2,430 interested</span>
                 </div>
               </div>
             </div>
@@ -154,143 +182,121 @@ export default function Home() {
         <section>
           <Container className="grid gap-10 md:grid-cols-[1fr_1.2fr]">
             <SectionHeading
-              eyebrow="About EHSAS"
-              title="Elden Heights School Alumni Society"
-              description="EHSAS stands for Elden Heights School Alumni Society. In Hindi, “ehsas” means feeling — the sense of belonging, connection, and shared memory that ties generations of Eldenites together."
+              eyebrow="Why EHSAS"
+              title="A modern society with heritage at its core"
+              description="We preserve Elden Heights traditions while building new pathways for mentorship, giving, and professional growth."
             />
-            <div className="grid gap-6 rounded-[28px] border border-border/60 bg-white/80 p-8 text-sm text-charcoal/80 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
-              <p>
-                Our alumni society preserves the legacy of Elden Heights while
-                creating fresh pathways for collaboration, mentorship, and
-                lifelong friendship.
-              </p>
-              <p>
-                Every member carries the spirit of the school forward — across
-                continents, careers, and communities.
-              </p>
+            <div className="grid gap-6">
+              {focusAreas.map((area) => (
+                <div
+                  key={area.title}
+                  className="rounded-[24px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.35)]"
+                >
+                  <p className="font-serif text-xl text-charcoal">
+                    {area.title}
+                  </p>
+                  <p className="mt-2 text-sm text-charcoal/70">
+                    {area.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </Container>
         </section>
 
-        <section className="bg-gradient-to-b from-mist/70 to-transparent py-20">
+        <section className="bg-gradient-to-b from-mist/70 via-background to-background py-20">
           <Container>
             <SectionHeading
-              eyebrow="How it works"
-              title="A trusted alumni registry"
-              description="From registration to verified access, every step is designed for authenticity, privacy, and belonging."
+              eyebrow="Programs"
+              title="Signature initiatives to connect alumni"
+              description="From scholarships to mentorship weekends, every program strengthens the alumni network."
             />
-            <div className="mt-10 grid gap-6 md:grid-cols-4">
-              {[
-                "Register your profile",
-                "Verified by admin",
-                "Receive your EHSAS ID",
-                "Access alumni community (coming soon)",
-              ].map((step, index) => (
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {programs.map((program) => (
                 <div
-                  key={step}
-                  className="rounded-2xl border border-border/60 bg-white/80 p-6 shadow-sm"
+                  key={program.title}
+                  className="rounded-[26px] border border-border/60 bg-white/85 p-6 shadow-[0_25px_70px_-55px_rgba(15,23,42,0.4)]"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
-                    Step {index + 1}
+                    {program.timeline}
                   </p>
-                  <p className="mt-3 font-serif text-lg text-charcoal">
-                    {step}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        <section>
-          <Container>
-            <SectionHeading
-              eyebrow="Alumni spotlight"
-              title="Stories that inspire"
-              description="Celebrating alumni who shape the world with distinction."
-            />
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {spotlight.map((alum) => (
-                <div
-                  key={alum.name}
-                  className="flex h-full flex-col justify-between rounded-[28px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
-                >
-                  <div className="space-y-4">
-                    <p className="font-serif text-xl text-charcoal">
-                      {alum.name}
-                    </p>
-                    <p className="text-xs uppercase tracking-[0.3em] text-crimson">
-                      {alum.detail}
-                    </p>
-                    <p className="text-sm text-charcoal/70">{alum.quote}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        <section className="bg-gradient-to-b from-mist to-background py-16">
-          <Container>
-            <SectionHeading
-              eyebrow="Events & Reunions"
-              title="Gather with your cohort"
-              description="Elegant reunions and virtual sessions that bring Eldenites together."
-            />
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
-              {events.map((event) => (
-                <div
-                  key={event.title}
-                  className="rounded-[28px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
-                >
-                  <p className="font-serif text-xl text-charcoal">
-                    {event.title}
-                  </p>
-                  <div className="mt-4 space-y-1 text-sm text-charcoal/70">
-                    <p>{event.date}</p>
-                    <p>{event.location}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        <section>
-          <Container>
-            <SectionHeading
-              eyebrow="Give back"
-              title="The next generation thrives with you"
-              description="Support Elden Heights by sharing time, opportunities, and resources."
-            />
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {givingBack.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-[28px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
-                >
-                  <p className="font-serif text-xl text-charcoal">
-                    {item.title}
+                  <p className="mt-3 font-serif text-xl text-charcoal">
+                    {program.title}
                   </p>
                   <p className="mt-3 text-sm text-charcoal/70">
-                    {item.description}
+                    {program.detail}
                   </p>
                 </div>
               ))}
             </div>
-            <div className="mt-8">
-              <Link
-                href="/register"
-                className="inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
-              >
-                Become a mentor
-              </Link>
+          </Container>
+        </section>
+
+        <section>
+          <Container>
+            <SectionHeading
+              eyebrow="Voices"
+              title="Stories from the alumni community"
+              description="Celebrating Eldenites who elevate the spirit of the society."
+            />
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.name}
+                  className="flex h-full flex-col justify-between rounded-[28px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
+                >
+                  <p className="text-sm text-charcoal/70">
+                    “{testimonial.quote}”
+                  </p>
+                  <div className="mt-6">
+                    <p className="font-serif text-lg text-charcoal">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-xs uppercase tracking-[0.25em] text-crimson">
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        <section>
+          <Container>
+            <div className="grid gap-10 rounded-[36px] border border-border/60 bg-gradient-to-r from-crimson/15 via-white to-mist px-10 py-12 md:grid-cols-[1.3fr_0.7fr] md:items-center">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+                  Ready to join?
+                </p>
+                <h2 className="mt-4 font-serif text-3xl text-charcoal">
+                  Be part of the next chapter of Elden Heights.
+                </h2>
+                <p className="mt-4 text-sm text-charcoal/70">
+                  Register in minutes and unlock access to alumni updates, event
+                  invites, and mentorship opportunities.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark"
+                >
+                  Start registration
+                </Link>
+                <Link
+                  href="/privacy"
+                  className="text-center text-sm font-semibold text-charcoal/70 hover:text-charcoal"
+                >
+                  Learn about privacy
+                </Link>
+              </div>
             </div>
           </Container>
         </section>
       </main>
 
-      <footer className="border-t border-border/60 bg-white/80 py-10">
+      <footer className="border-t border-border/60 bg-white/70 py-10">
         <Container className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="space-y-2">
             <p className="font-serif text-xl text-charcoal">
