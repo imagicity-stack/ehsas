@@ -50,13 +50,13 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Container className="py-24">
-        <div className="mx-auto max-w-md space-y-6 rounded-3xl border border-border bg-white p-8 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+        <div className="mx-auto max-w-md space-y-6 rounded-[32px] border border-border/60 bg-white/80 p-8 shadow-[0_25px_70px_-55px_rgba(15,23,42,0.5)]">
+          <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
             Admin Access
-          </p>
+          </span>
           <h1 className="font-serif text-3xl text-charcoal">Admin Login</h1>
           {message ? (
-            <div className="rounded-2xl border border-crimson/40 bg-red-50 px-4 py-3 text-sm text-crimson">
+            <div className="rounded-2xl border border-crimson/30 bg-red-50 px-4 py-3 text-sm text-crimson">
               {message}
             </div>
           ) : null}
@@ -68,7 +68,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-crimson"
+                className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
               />
             </label>
             <label className="space-y-2 text-sm">
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
-                className="w-full rounded-xl border border-border px-4 py-3 text-sm outline-none focus:border-crimson"
+                className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
               />
             </label>
             <button

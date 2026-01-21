@@ -66,7 +66,7 @@ const givingBack = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border/70 bg-background/90 backdrop-blur">
+      <header className="border-b border-border/60 bg-white/80 backdrop-blur">
         <Container className="flex items-center justify-between py-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
@@ -86,12 +86,12 @@ export default function Home() {
 
       <main className="space-y-24 pb-24">
         <section className="pt-16 md:pt-24">
-          <Container className="grid gap-12 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+          <Container className="grid gap-12 rounded-[40px] border border-border/60 bg-white/80 px-8 py-12 shadow-[0_30px_80px_-60px_rgba(15,23,42,0.6)] md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.4em] text-crimson">
+                <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.4em] text-crimson">
                   Alumni Society
-                </p>
+                </span>
                 <h1 className="font-serif text-4xl leading-tight text-charcoal md:text-6xl">
                   EHSAS
                 </h1>
@@ -112,18 +112,18 @@ export default function Home() {
                 </Link>
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center rounded-full border border-charcoal/30 px-6 py-3 text-sm font-semibold text-charcoal transition hover:border-charcoal/60 hover:bg-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                  className="inline-flex items-center justify-center rounded-full border border-charcoal/20 bg-white/60 px-6 py-3 text-sm font-semibold text-charcoal transition hover:border-charcoal/40 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
                   aria-label="Explore Alumni Network"
                 >
                   Explore Alumni Network
                 </button>
               </div>
             </div>
-            <div className="rounded-3xl border border-border bg-white p-8 shadow-sm">
+            <div className="rounded-[28px] border border-border/60 bg-gradient-to-br from-white via-white to-mist p-8 shadow-[0_25px_70px_-50px_rgba(15,23,42,0.45)]">
               <div className="space-y-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+                <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
                   Harvard-inspired
-                </p>
+                </span>
                 <h2 className="font-serif text-3xl text-charcoal">
                   A legacy of excellence, refined for today.
                 </h2>
@@ -140,7 +140,7 @@ export default function Home() {
                   ].map((item) => (
                     <div
                       key={item}
-                      className="rounded-2xl border border-border bg-mist px-4 py-3 text-charcoal"
+                      className="rounded-2xl border border-border/60 bg-white/80 px-4 py-3 text-charcoal"
                     >
                       {item}
                     </div>
@@ -158,7 +158,7 @@ export default function Home() {
               title="Elden Heights School Alumni Society"
               description="EHSAS stands for Elden Heights School Alumni Society. In Hindi, “ehsas” means feeling — the sense of belonging, connection, and shared memory that ties generations of Eldenites together."
             />
-            <div className="grid gap-6 rounded-3xl border border-border bg-white p-8 text-sm text-charcoal/80 shadow-sm">
+            <div className="grid gap-6 rounded-[28px] border border-border/60 bg-white/80 p-8 text-sm text-charcoal/80 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
               <p>
                 Our alumni society preserves the legacy of Elden Heights while
                 creating fresh pathways for collaboration, mentorship, and
@@ -172,7 +172,7 @@ export default function Home() {
           </Container>
         </section>
 
-        <section className="bg-white/60 py-16">
+        <section className="bg-gradient-to-b from-mist/70 to-transparent py-20">
           <Container>
             <SectionHeading
               eyebrow="How it works"
@@ -188,7 +188,7 @@ export default function Home() {
               ].map((step, index) => (
                 <div
                   key={step}
-                  className="rounded-2xl border border-border bg-background p-6 shadow-sm"
+                  className="rounded-2xl border border-border/60 bg-white/80 p-6 shadow-sm"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
                     Step {index + 1}
@@ -213,7 +213,7 @@ export default function Home() {
               {spotlight.map((alum) => (
                 <div
                   key={alum.name}
-                  className="flex h-full flex-col justify-between rounded-3xl border border-border bg-white p-6 shadow-sm"
+                  className="flex h-full flex-col justify-between rounded-[28px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
                 >
                   <div className="space-y-4">
                     <p className="font-serif text-xl text-charcoal">
@@ -230,7 +230,7 @@ export default function Home() {
           </Container>
         </section>
 
-        <section className="bg-mist py-16">
+        <section className="bg-gradient-to-b from-mist to-background py-16">
           <Container>
             <SectionHeading
               eyebrow="Events & Reunions"
@@ -241,7 +241,7 @@ export default function Home() {
               {events.map((event) => (
                 <div
                   key={event.title}
-                  className="rounded-3xl border border-border bg-white p-6 shadow-sm"
+                  className="rounded-[28px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
                 >
                   <p className="font-serif text-xl text-charcoal">
                     {event.title}
@@ -267,7 +267,7 @@ export default function Home() {
               {givingBack.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-3xl border border-border bg-white p-6 shadow-sm"
+                  className="rounded-[28px] border border-border/60 bg-white/80 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
                 >
                   <p className="font-serif text-xl text-charcoal">
                     {item.title}
@@ -290,7 +290,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-border bg-white/70 py-10">
+      <footer className="border-t border-border/60 bg-white/80 py-10">
         <Container className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="space-y-2">
             <p className="font-serif text-xl text-charcoal">

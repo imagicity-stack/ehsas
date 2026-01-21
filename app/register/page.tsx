@@ -5,15 +5,6 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 
-const houses = [
-  "Tagore",
-  "Gandhi",
-  "Teresa",
-  "Kalam",
-  "Laxmi",
-  "Other",
-];
-
 const currentYear = new Date().getFullYear();
 
 const defaultForm = {
@@ -26,7 +17,6 @@ const defaultForm = {
   classOfJoining: "",
   lastClassStudied: "",
   lastHouse: "",
-  lastHouseOther: "",
   addressFull: "",
   city: "",
   pincode: "",
@@ -48,8 +38,6 @@ export default function RegisterPage() {
     status: "idle",
   });
 
-  const isOtherHouse = form.lastHouse === "Other";
-
   const errors = useMemo(() => {
     const result: string[] = [];
     if (!form.firstName.trim()) result.push("First name is required.");
@@ -62,8 +50,6 @@ export default function RegisterPage() {
     if (!form.lastClassStudied.trim())
       result.push("Last class studied is required.");
     if (!form.lastHouse.trim()) result.push("Last house is required.");
-    if (isOtherHouse && !form.lastHouseOther.trim())
-      result.push("Please specify your house.");
     if (!form.addressFull.trim()) result.push("Full address is required.");
     if (!form.city.trim()) result.push("City is required.");
     if (!form.pincode.trim()) result.push("Pincode is required.");
@@ -88,16 +74,11 @@ export default function RegisterPage() {
     }
 
     return result;
-  }, [form, isOtherHouse]);
+  }, [form]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
@@ -114,17 +95,12 @@ export default function RegisterPage() {
 
     setSubmitState({ status: "loading" });
     try {
-      const payload = {
-        ...form,
-        lastHouse: isOtherHouse ? form.lastHouseOther : form.lastHouse,
-      };
-
       const response = await fetch("/api/requests/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(form),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -142,10 +118,10 @@ export default function RegisterPage() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Container className="py-24">
-          <div className="mx-auto max-w-2xl rounded-3xl border border-border bg-white p-10 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+          <div className="mx-auto max-w-2xl rounded-[32px] border border-border/60 bg-white/80 p-10 text-center shadow-[0_25px_70px_-55px_rgba(15,23,42,0.5)]">
+            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
               Request submitted
-            </p>
+            </span>
             <h1 className="mt-4 font-serif text-3xl text-charcoal">
               Thanks. Your request is submitted.
             </h1>
@@ -185,9 +161,9 @@ export default function RegisterPage() {
       <Container className="py-16 md:py-24">
         <div className="space-y-10">
           <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson">
               Registration
-            </p>
+            </span>
             <h1 className="font-serif text-4xl text-charcoal">
               Alumni Registration
             </h1>
@@ -198,20 +174,20 @@ export default function RegisterPage() {
           </div>
 
           {submitState.status === "error" ? (
-            <div className="rounded-2xl border border-crimson/40 bg-red-50 px-4 py-3 text-sm text-crimson">
+            <div className="rounded-2xl border border-crimson/30 bg-red-50 px-4 py-3 text-sm text-crimson">
               {submitState.message}
             </div>
           ) : null}
 
           <form
             onSubmit={handleSubmit}
-            className="space-y-10 rounded-3xl border border-border bg-white p-8 shadow-sm"
+            className="space-y-10 rounded-[32px] border border-border/60 bg-white/80 p-8 shadow-[0_25px_70px_-55px_rgba(15,23,42,0.45)]"
           >
             <SectionHeading
               eyebrow="Student's Profile"
               title="Student's Profile"
               description="Share your academic journey so we can verify your alumni status."
-              className="border-b border-border pb-6"
+              className="border-b border-border/60 pb-6"
             />
 
             <div className="grid gap-6 md:grid-cols-2">
@@ -244,49 +220,31 @@ export default function RegisterPage() {
                     value={form[field.name as keyof FormState]}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
+                    className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
                   />
                 </label>
               ))}
               <label className="space-y-2 text-sm">
                 <span className="text-charcoal">
-                  Last House while in School<span className="text-crimson">*</span>
+                  Last House while in School
+                  <span className="text-crimson">*</span>
                 </span>
-                <select
+                <input
                   name="lastHouse"
                   value={form.lastHouse}
-                  onChange={handleSelect}
+                  onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
-                >
-                  <option value="">Select</option>
-                  {houses.map((house) => (
-                    <option key={house} value={house}>
-                      {house}
-                    </option>
-                  ))}
-                </select>
+                  className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
+                  placeholder="Enter your house name"
+                />
               </label>
-              {isOtherHouse ? (
-                <label className="space-y-2 text-sm">
-                  <span className="text-charcoal">
-                    Specify House<span className="text-crimson">*</span>
-                  </span>
-                  <input
-                    name="lastHouseOther"
-                    value={form.lastHouseOther}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
-                  />
-                </label>
-              ) : null}
             </div>
 
             <SectionHeading
               eyebrow="Address"
               title="Address"
               description="Your current location helps us connect alumni in the same region."
-              className="border-b border-border pb-6"
+              className="border-b border-border/60 pb-6"
             />
             <div className="grid gap-6 md:grid-cols-2">
               <label className="space-y-2 text-sm md:col-span-2">
@@ -299,7 +257,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   rows={4}
                   required
-                  className="w-full resize-none rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
+                  className="w-full resize-none rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
                 />
               </label>
               {[
@@ -318,7 +276,7 @@ export default function RegisterPage() {
                     value={form[field.name as keyof FormState]}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
+                    className="w-full rounded-xl border border-border/60 bg-white/80 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20"
                   />
                 </label>
               ))}
