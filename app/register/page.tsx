@@ -5,15 +5,6 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 
-const houses = [
-  "Tagore",
-  "Gandhi",
-  "Teresa",
-  "Kalam",
-  "Laxmi",
-  "Other",
-];
-
 const currentYear = new Date().getFullYear();
 
 const defaultForm = {
@@ -26,7 +17,6 @@ const defaultForm = {
   classOfJoining: "",
   lastClassStudied: "",
   lastHouse: "",
-  lastHouseOther: "",
   addressFull: "",
   city: "",
   pincode: "",
@@ -42,13 +32,14 @@ type SubmitState =
   | { status: "error"; message: string }
   | { status: "success" };
 
+const inputClassName =
+  "w-full rounded-2xl border border-border/60 bg-white/85 px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson focus:ring-2 focus:ring-crimson/20";
+
 export default function RegisterPage() {
   const [form, setForm] = useState<FormState>(defaultForm);
   const [submitState, setSubmitState] = useState<SubmitState>({
     status: "idle",
   });
-
-  const isOtherHouse = form.lastHouse === "Other";
 
   const errors = useMemo(() => {
     const result: string[] = [];
@@ -62,8 +53,6 @@ export default function RegisterPage() {
     if (!form.lastClassStudied.trim())
       result.push("Last class studied is required.");
     if (!form.lastHouse.trim()) result.push("Last house is required.");
-    if (isOtherHouse && !form.lastHouseOther.trim())
-      result.push("Please specify your house.");
     if (!form.addressFull.trim()) result.push("Full address is required.");
     if (!form.city.trim()) result.push("City is required.");
     if (!form.pincode.trim()) result.push("Pincode is required.");
@@ -88,16 +77,11 @@ export default function RegisterPage() {
     }
 
     return result;
-  }, [form, isOtherHouse]);
+  }, [form]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
@@ -114,17 +98,12 @@ export default function RegisterPage() {
 
     setSubmitState({ status: "loading" });
     try {
-      const payload = {
-        ...form,
-        lastHouse: isOtherHouse ? form.lastHouseOther : form.lastHouse,
-      };
-
       const response = await fetch("/api/requests/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(form),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -142,10 +121,10 @@ export default function RegisterPage() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Container className="py-24">
-          <div className="mx-auto max-w-2xl rounded-3xl border border-border bg-white p-10 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+          <div className="mx-auto max-w-2xl rounded-[36px] border border-border/60 bg-white/85 p-12 text-center shadow-[0_30px_80px_-60px_rgba(15,23,42,0.5)]">
+            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
               Request submitted
-            </p>
+            </span>
             <h1 className="mt-4 font-serif text-3xl text-charcoal">
               Thanks. Your request is submitted.
             </h1>
@@ -163,7 +142,7 @@ export default function RegisterPage() {
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
+                className="inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson"
               >
                 Return home
               </Link>
@@ -182,36 +161,51 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <section className="border-b border-border/60 bg-white/70">
+        <Container className="py-16 md:py-20">
+          <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div className="space-y-4">
+              <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
+                Registration
+              </span>
+              <h1 className="font-serif text-4xl text-charcoal">
+                Alumni Registration
+              </h1>
+              <p className="max-w-2xl text-sm text-charcoal/70">
+                Submit your details for verification. Once approved, you will
+                receive your EHSAS ID and access to alumni updates.
+              </p>
+            </div>
+            <div className="rounded-[28px] border border-border/60 bg-gradient-to-br from-crimson/10 via-white to-mist p-6 text-sm text-charcoal/70">
+              <p className="font-semibold text-charcoal">What you&apos;ll get</p>
+              <ul className="mt-3 space-y-2">
+                <li>Verified alumni credentials</li>
+                <li>Event and reunion invitations</li>
+                <li>Mentorship matching opportunities</li>
+                <li>Access to chapter updates</li>
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       <Container className="py-16 md:py-24">
         <div className="space-y-10">
-          <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
-              Registration
-            </p>
-            <h1 className="font-serif text-4xl text-charcoal">
-              Alumni Registration
-            </h1>
-            <p className="max-w-2xl text-sm text-charcoal/70">
-              Submit your details for verification. Once approved, you will
-              receive your EHSAS ID and access to alumni updates.
-            </p>
-          </div>
-
           {submitState.status === "error" ? (
-            <div className="rounded-2xl border border-crimson/40 bg-red-50 px-4 py-3 text-sm text-crimson">
+            <div className="rounded-2xl border border-crimson/30 bg-red-50 px-4 py-3 text-sm text-crimson">
               {submitState.message}
             </div>
           ) : null}
 
           <form
             onSubmit={handleSubmit}
-            className="space-y-10 rounded-3xl border border-border bg-white p-8 shadow-sm"
+            className="space-y-10 rounded-[36px] border border-border/60 bg-white/85 p-10 shadow-[0_30px_80px_-60px_rgba(15,23,42,0.45)]"
           >
             <SectionHeading
               eyebrow="Student's Profile"
               title="Student's Profile"
               description="Share your academic journey so we can verify your alumni status."
-              className="border-b border-border pb-6"
+              className="border-b border-border/60 pb-6"
             />
 
             <div className="grid gap-6 md:grid-cols-2">
@@ -244,49 +238,31 @@ export default function RegisterPage() {
                     value={form[field.name as keyof FormState]}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
+                    className={inputClassName}
                   />
                 </label>
               ))}
               <label className="space-y-2 text-sm">
                 <span className="text-charcoal">
-                  Last House while in School<span className="text-crimson">*</span>
+                  Last House while in School
+                  <span className="text-crimson">*</span>
                 </span>
-                <select
+                <input
                   name="lastHouse"
                   value={form.lastHouse}
-                  onChange={handleSelect}
+                  onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
-                >
-                  <option value="">Select</option>
-                  {houses.map((house) => (
-                    <option key={house} value={house}>
-                      {house}
-                    </option>
-                  ))}
-                </select>
+                  className={inputClassName}
+                  placeholder="Enter your house name"
+                />
               </label>
-              {isOtherHouse ? (
-                <label className="space-y-2 text-sm">
-                  <span className="text-charcoal">
-                    Specify House<span className="text-crimson">*</span>
-                  </span>
-                  <input
-                    name="lastHouseOther"
-                    value={form.lastHouseOther}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
-                  />
-                </label>
-              ) : null}
             </div>
 
             <SectionHeading
               eyebrow="Address"
               title="Address"
               description="Your current location helps us connect alumni in the same region."
-              className="border-b border-border pb-6"
+              className="border-b border-border/60 pb-6"
             />
             <div className="grid gap-6 md:grid-cols-2">
               <label className="space-y-2 text-sm md:col-span-2">
@@ -299,7 +275,7 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   rows={4}
                   required
-                  className="w-full resize-none rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
+                  className={inputClassName}
                 />
               </label>
               {[
@@ -318,7 +294,7 @@ export default function RegisterPage() {
                     value={form[field.name as keyof FormState]}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-border px-4 py-3 text-sm text-charcoal outline-none transition focus:border-crimson"
+                    className={inputClassName}
                   />
                 </label>
               ))}
@@ -332,7 +308,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={submitState.status === "loading"}
-                className="inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {submitState.status === "loading"
                   ? "Submitting..."

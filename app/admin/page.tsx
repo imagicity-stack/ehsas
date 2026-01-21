@@ -224,10 +224,10 @@ export default function AdminDashboard() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Container className="py-10">
-          <div className="rounded-3xl border border-border bg-white p-8 text-center shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+          <div className="rounded-[36px] border border-border/60 bg-white/85 p-10 text-center shadow-[0_30px_80px_-60px_rgba(15,23,42,0.5)]">
+            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
               Access Required
-            </p>
+            </span>
             <h1 className="mt-4 font-serif text-3xl text-charcoal">
               Please log in to continue
             </h1>
@@ -236,7 +236,7 @@ export default function AdminDashboard() {
             </p>
             <Link
               href="/admin/login"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-crimson px-6 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark"
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-crimson px-7 py-3 text-sm font-semibold text-white transition hover:bg-crimson-dark"
             >
               Go to Admin Login
             </Link>
@@ -251,10 +251,12 @@ export default function AdminDashboard() {
       <Container className="py-10">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-crimson">
+            <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
               Admin Dashboard
-            </p>
-            <h1 className="font-serif text-3xl text-charcoal">EHSAS Admin</h1>
+            </span>
+            <h1 className="mt-3 font-serif text-3xl text-charcoal">
+              EHSAS Admin
+            </h1>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <Link
@@ -266,7 +268,7 @@ export default function AdminDashboard() {
             <button
               type="button"
               onClick={handleSignOut}
-              className="rounded-full border border-charcoal/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-charcoal transition hover:border-crimson hover:text-crimson"
+              className="rounded-full border border-charcoal/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-charcoal transition hover:border-crimson hover:text-crimson"
             >
               Sign out
             </button>
@@ -274,16 +276,16 @@ export default function AdminDashboard() {
         </div>
 
         {error ? (
-          <div className="mt-6 rounded-2xl border border-crimson/40 bg-red-50 px-4 py-3 text-sm text-crimson">
+          <div className="mt-6 rounded-2xl border border-crimson/30 bg-red-50 px-4 py-3 text-sm text-crimson">
             {error}
           </div>
         ) : null}
 
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {["pending", "approved", "rejected"].map((key) => (
+          {(["pending", "approved", "rejected"] as const).map((key) => (
             <div
               key={key}
-              className="rounded-3xl border border-border bg-white p-6 shadow-sm"
+              className="rounded-[28px] border border-border/60 bg-white/85 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson">
                 {key}
@@ -297,7 +299,7 @@ export default function AdminDashboard() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[2.2fr_1fr]">
           <div className="space-y-6">
-            <div className="rounded-3xl border border-border bg-white p-6 shadow-sm">
+            <div className="rounded-[28px] border border-border/60 bg-white/85 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <h2 className="font-serif text-2xl text-charcoal">
@@ -316,7 +318,7 @@ export default function AdminDashboard() {
                       className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
                         status === option
                           ? "bg-crimson text-white"
-                          : "border border-border text-charcoal/70 hover:border-crimson"
+                          : "border border-border/60 text-charcoal/70 hover:border-crimson"
                       }`}
                     >
                       {option}
@@ -335,7 +337,7 @@ export default function AdminDashboard() {
                       search: event.target.value,
                     }))
                   }
-                  className="rounded-xl border border-border px-4 py-2 text-sm outline-none focus:border-crimson md:col-span-2"
+                  className="rounded-2xl border border-border/60 bg-white/85 px-4 py-2 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20 md:col-span-2"
                 />
                 <input
                   placeholder="Year of Leaving"
@@ -346,7 +348,7 @@ export default function AdminDashboard() {
                       year: event.target.value,
                     }))
                   }
-                  className="rounded-xl border border-border px-4 py-2 text-sm outline-none focus:border-crimson"
+                  className="rounded-2xl border border-border/60 bg-white/85 px-4 py-2 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
                 />
                 <input
                   placeholder="City"
@@ -357,7 +359,7 @@ export default function AdminDashboard() {
                       city: event.target.value,
                     }))
                   }
-                  className="rounded-xl border border-border px-4 py-2 text-sm outline-none focus:border-crimson"
+                  className="rounded-2xl border border-border/60 bg-white/85 px-4 py-2 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
                 />
                 <input
                   placeholder="House"
@@ -368,13 +370,13 @@ export default function AdminDashboard() {
                       house: event.target.value,
                     }))
                   }
-                  className="rounded-xl border border-border px-4 py-2 text-sm outline-none focus:border-crimson"
+                  className="rounded-2xl border border-border/60 bg-white/85 px-4 py-2 text-sm outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/20"
                 />
               </div>
 
-              <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+              <div className="mt-6 overflow-hidden rounded-2xl border border-border/60">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-mist text-xs uppercase tracking-[0.2em] text-charcoal/70">
+                  <thead className="bg-mist/80 text-xs uppercase tracking-[0.2em] text-charcoal/70">
                     <tr>
                       <th className="px-4 py-3">Name</th>
                       <th className="px-4 py-3">Email</th>
@@ -402,7 +404,7 @@ export default function AdminDashboard() {
                             : "-"}
                         </td>
                         <td className="px-4 py-3">
-                          <span className="rounded-full border border-border px-3 py-1 text-xs uppercase tracking-[0.2em] text-charcoal/70">
+                          <span className="rounded-full border border-border/60 px-3 py-1 text-xs uppercase tracking-[0.2em] text-charcoal/70">
                             {item.status}
                           </span>
                         </td>
@@ -453,12 +455,12 @@ export default function AdminDashboard() {
             </div>
 
             {selected ? (
-              <div className="rounded-3xl border border-border bg-white p-6 shadow-sm">
+              <div className="rounded-[28px] border border-border/60 bg-white/85 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson">
+                    <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson">
                       Request detail
-                    </p>
+                    </span>
                     <h3 className="mt-2 font-serif text-2xl text-charcoal">
                       {selected.firstName} {selected.lastName}
                     </h3>
@@ -504,7 +506,7 @@ export default function AdminDashboard() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-3xl border border-border bg-white p-6 shadow-sm">
+            <div className="rounded-[28px] border border-border/60 bg-white/85 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
               <h3 className="font-serif text-xl text-charcoal">Notifications</h3>
               <p className="text-xs text-charcoal/60">
                 Latest admin actions this session.
@@ -513,7 +515,7 @@ export default function AdminDashboard() {
                 {activity.slice(0, 20).map((entry) => (
                   <div
                     key={entry.id + entry.timestamp}
-                    className="rounded-2xl border border-border px-4 py-3 text-xs text-charcoal/70"
+                    className="rounded-2xl border border-border/60 bg-white/80 px-4 py-3 text-xs text-charcoal/70"
                   >
                     <p className="font-semibold text-charcoal">
                       {entry.message}
@@ -524,13 +526,11 @@ export default function AdminDashboard() {
                   </div>
                 ))}
                 {!activity.length ? (
-                  <p className="text-xs text-charcoal/50">
-                    No actions yet.
-                  </p>
+                  <p className="text-xs text-charcoal/50">No actions yet.</p>
                 ) : null}
               </div>
             </div>
-            <div className="rounded-3xl border border-border bg-white p-6 shadow-sm">
+            <div className="rounded-[28px] border border-border/60 bg-white/85 p-6 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
               <h3 className="font-serif text-xl text-charcoal">Quick Tips</h3>
               <ul className="mt-4 space-y-3 text-xs text-charcoal/70">
                 <li>Approve requests after verifying alumni details.</li>

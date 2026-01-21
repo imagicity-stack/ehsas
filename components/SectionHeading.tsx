@@ -15,15 +15,17 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("space-y-4", className)}>
       {eyebrow ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson">
+        <span className="inline-flex w-fit items-center rounded-full bg-crimson/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson">
           {eyebrow}
-        </p>
+        </span>
       ) : null}
-      <h2 className="font-serif text-3xl text-charcoal md:text-4xl">{title}</h2>
+      <h2 className="font-serif text-3xl leading-tight text-charcoal md:text-4xl">
+        {title}
+      </h2>
       {description ? (
-        <p className="max-w-2xl text-base text-charcoal/80">{description}</p>
+        <p className="max-w-2xl text-base text-charcoal/75">{description}</p>
       ) : null}
     </div>
   );

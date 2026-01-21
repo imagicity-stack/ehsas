@@ -19,8 +19,18 @@ export async function requireAdmin(authorization?: string): Promise<AdminContext
   const isClaimAdmin = decoded.role === "admin";
 
   if (!isClaimAdmin) {
-    const adminDoc = await adminDb.collection("admins").doc(decoded.uid).get();
-    const isDocAdmin = adminDoc.exists && adminDoc.data()?.role === "admin";
+    const email = decoded.email?.toLowerCase();
+    if (!email) {
+      throw new Error("Not authorized");
+    }
+
+    const adminSnapshot = await adminDb
+      .collection("user")
+      .where("email", "==", email)
+      .limit(1)
+      .get();
+    const adminRecord = adminSnapshot.docs[0]?.data();
+    const isDocAdmin = adminRecord?.role === "admin";
     if (!isDocAdmin) {
       throw new Error("Not authorized");
     }
